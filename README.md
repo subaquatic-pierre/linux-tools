@@ -113,14 +113,14 @@ Viewing contents of files
 
 - this will only show information regarding the user which you grepped for
 
-Remove directory
+##### Remove directory
 
     rm -rf /path/to/dir
 
 - r - recursively remove all files
 - f - forcefully (be carefull when using this variant)
 
-Create file
+##### Create file
 
     touch -p /path/to/file
 
