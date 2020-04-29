@@ -6,7 +6,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ## Contents
 
-[Software](#containers)
+[Software](#sofware)
 
 [Processes](#processes)
 
@@ -33,6 +33,9 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 - [Groups](#groups)
 
 [Storage Devices](#storage-devices)
+
+- [Disk Usage](#disk-usage)
+- [Managin Devices](#managing-devices)
 
 ## Software
 
@@ -61,6 +64,10 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
         eval 'ssh-agent -s'
 
+##### Run a script on remote ssh
+
+        ssh root@MachineB 'bash -s' < local_script.sh
+
 ## Shell Scripting
 
 ## Logging
@@ -71,10 +78,6 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 - n - number of lines
 - f - keep file open
-
-##### Run a script on remote ssh
-
-        ssh root@MachineB 'bash -s' < local_script.sh
 
 ## Containers
 
@@ -115,6 +118,12 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 - p - assign port mapping first is host second is container port
 
 ## Managing Files
+
+##### Create symlink
+
+    ls -s originalfile linkedfile
+
+- this command create a soft symbolic link to the first file, the second file can be moved around anywhere and minipulated. When it is open it points to the original file. it is similar to a shortcut on Windows OS
 
 ##### Make new directory
 
@@ -169,13 +178,19 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 | -rw-rw----  | 660   | Only user and group can read and write file                |
 | -rw-r--r--  | 664   | User read and write, group and other only read             |
 
+##### Read, write, execute
+
+| r   | w   | x   |
+| --- | --- | --- |
+| 4   | 2   | 1   |
+
 ##### Comparison
 
-| Compared |     |
-| -------- | --- |
+| Compared |     |     |     |
+| -------- | --- | --- | --- |
 | Symbolic | rwx | r-x | r-- |
 | Binary   | 111 | 101 | 100 |
-| Decimal  | 7   | 5 | 4 |
+| Decimal  | 7   | 5   | 4   |
 
 ##### Chnage directory mode recursively
 
@@ -212,6 +227,8 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 ##### Add new user
 
     sudo adduser username
+
+- this command as a script for the useradd command
 
 ##### Delete user
 
@@ -289,3 +306,57 @@ Install this application to set minimum requirements for passwords. This increas
     sudo gpasswd -d username grouptoremove
 
 ## Storage Devices
+
+### Disk Usage
+
+##### Install ncdu
+
+    sudo apt install ncdu
+
+- this program allows a person to naviage though the directory tree while viewing disk usage
+
+##### Show disk usage
+
+    df -h
+
+- h - shows usage in human readable form
+
+##### Show inodes
+
+    df -i
+
+- i - shows free inodes
+
+##### Check disk usage
+
+    du -hsc *
+
+- h - shows human readbale disk usage
+- s - summary
+- c - current working directory
+
+### Manageing Devices
+
+#### Important folders
+
+    /etc/fstab
+
+- this folder lists all active file storage devices on the machine. it also whows where devices should be mounted on startup
+
+##### Show all disks
+
+    sudo fdisk -l
+
+##### List all block devices
+
+    lsblk
+
+##### Show device UID
+
+    blkid
+
+##### Mount all available disks
+
+    sudo mount -a
+
+- a - automatically mount all available disks
