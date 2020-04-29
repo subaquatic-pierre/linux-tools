@@ -4,18 +4,39 @@ A list of commands for tasks and troubleshooting, commands will work with Debian
 
 Be sure to read the flags underneath each command. It may not always be nesscesray to use all of the flags. Only use the options which apply to the use case.
 
-## **Contents**
+## Contents
 
-[Managing Files](#managing-files)
+[Software](#containers)
+
+[Processes](#processes)
+
+[Networking](#networking)
+
+- [Network Processes](#network-processes)
+
+[SSH](#ssh)
+
+[Shell Scripting](#shell-scripting)
+
+[Logging](#logging)
 
 [Containers](#containers)
 
+- [Docker](#docker)
+
+[Managing Files](#managing-files)
+
 [Permissions](#Permissions)
 
+- [Modes](#modes)
 - [Users](#users)
 - [Groups](#groups)
 
-## Storage Devices
+[Storage Devices](#storage-devices)
+
+## Software
+
+## Processes
 
 ## Networking
 
@@ -40,7 +61,9 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
         eval 'ssh-agent -s'
 
-### Logging
+## Shell Scripting
+
+## Logging
 
 ##### Check live log files
 
@@ -75,7 +98,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
         docker container prune
 
-### Start a container
+#### Start a container
 
 ##### Build contianer from local Dockerfile
 
@@ -133,6 +156,8 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 - Permisions on a directory can effect files in the directory
 - If the file permsiosns look correct, check directory Permisions
 - Work your way up to root
+
+### Modes
 
 ##### Examples
 
@@ -263,8 +288,4 @@ Install this application to set minimum requirements for passwords. This increas
 
     sudo gpasswd -d username grouptoremove
 
-## Software Packages
-
-## Processes
-
-## Shell Scripting
+## Storage Devices
