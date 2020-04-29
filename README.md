@@ -57,21 +57,21 @@ Run a script on remote ssh
 
 ### Docker
 
-List images
+##### List images
 
         docker images ls
 
-List containers
+##### List containers
 
         docker container ls -a
 
 - a - list all containers, without the flag it only shows active containers
 
-Remove image
+##### Remove image
 
         docker rmi image_name
 
-Remove all containers
+##### Remove all containers
 
         docker container prune
 
@@ -107,9 +107,7 @@ Viewing contents of files
 
 - number of lines to be displayed when using the head or tail command
 
-Grep contents
-
-Grep the contents of an output with the grep command. This is used to filter output to whatever you are looking for eg.
+##### Grep for contents
 
     cat /etc/shadow | grep myuser
 
