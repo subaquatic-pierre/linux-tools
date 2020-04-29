@@ -21,7 +21,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ### Network processes
 
-#### Check what proccess ID running on what port
+Check what proccess ID running on what port
 
         sudo netstat -ltnp
 
@@ -32,30 +32,24 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ## SSH
 
-#### Secure Copy to remote machine
+Secure Copy to remote machine
 
         scp /path/to/file user@target:/path/to/target
 
-#### Start ssh agent
+Start ssh agent
 
         eval 'ssh-agent -s'
 
-## Software Packages
-
-## Processes
-
 ### Logging
 
-#### Check live log files
+Check live log files
 
         sudo tail n10 -f /path/to/file
 
-- n: number of lines
-- f: keep file open
+- n - number of lines
+- f - keep file open
 
-## Shell Scripting
-
-#### Run script on remote ssh
+Run a script on remote ssh
 
         ssh root@MachineB 'bash -s' < local_script.sh
 
@@ -63,49 +57,47 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ### Docker
 
-#### List images
+List images
 
         docker images ls
 
-#### List containers
+List containers
 
         docker container ls -a
 
-- a: list all containers, without the flag it only shows active containers
+- a - list all containers, without the flag it only shows active containers
 
-#### Remove image
+Remove image
 
         docker rmi image_name
 
-#### Remove all containers
+Remove all containers
 
         docker container prune
 
 ### Start a container
 
-#### Build contianer from local Dockerfile
+Build contianer from local Dockerfile
 
         docker build -t image_name .
 
-- t: name you wish to give the container
+- t - name you wish to give the container
 
-#### Run container after building it
+Run container after building it
 
         docker run -d --name container_name -p 80:80 image_name
 
-- d:
-- name: give container name or a default one will be created
-- p: assign port mapping first is host second is container port
+- d -
+- name - give container name or a default one will be created
+- p - assign port mapping first is host second is container port
 
 ## Managing Files
 
----
-
-#### Make new directory
+Make new directory
 
     mkdir /path/to/dir
 
-#### Viewing contents of files
+Viewing contents of files
 
     cat /path/tofile            - Display the contents of file
     more /path/tofile           - Browse through text file
@@ -115,7 +107,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 - number of lines to be displayed when using the head or tail command
 
-#### Grep contents
+Grep contents
 
 Grep the contents of an output with the grep command. This is used to filter output to whatever you are looking for eg.
 
@@ -123,22 +115,20 @@ Grep the contents of an output with the grep command. This is used to filter out
 
 - this will only show information regarding the user which you grepped for
 
-#### Remove directory
+Remove directory
 
     rm -rf /path/to/dir
 
 - r - recursively remove all files
 - f - forcefully (be carefull when using this variant)
 
-#### Create file
+Create file
 
     touch -p /path/to/file
 
 - p - creates all parent folders if they dont exist
 
 ## Permissions
-
----
 
 ### Users
 
@@ -152,23 +142,17 @@ Grep the contents of an output with the grep command. This is used to filter out
 
 - This folder contains password information of users
 
-#### Swithing user
+Swithing user
 
     su username
 
 - exclude the username if you wish to swith to root user
 
-#### Using root permissions
-
-    root
-
-####
-
-#### Add new user
+Add new user
 
     sudo adduser username
 
-#### Delete user
+Delete user
 
     sudo -r userdel username
 
@@ -182,3 +166,9 @@ Grep the contents of an output with the grep command. This is used to filter out
     /etc/group
 
 - this file shows all groups on the machine
+
+## Software Packages
+
+## Processes
+
+## Shell Scripting
