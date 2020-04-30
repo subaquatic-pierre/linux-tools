@@ -1,8 +1,10 @@
-# linux-tools
+# Linux Tools
 
 A list of commands for tasks and troubleshooting, commands will work with Debian and Ubuntu distributions.
 
 Be sure to read the flags underneath each command. It may not always be nesscesray to use all of the flags. Only use the options which apply to the use case.
+
+---
 
 ## Contents
 
@@ -37,36 +39,188 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 - [Disk Usage](#disk-usage)
 - [Managin Devices](#managing-devices)
 
-## Software
+[Usefull Packages](#usefull-packages)
+
+- [Aptitude](#aptitude)
+- [AWS CLI](#storage-devices)
+- [Tmux](#tmux)
+
+---
+
+## Packages
+
+#### Folders of interest
+
+    /etc/apt/sources.list
+
+- this is where apt searches for repos for packages. To add a new package to the repo list create a new file called _packagename.list.d_. this will have apt search any file with .list extension
+
+#### Install packes backed up with dpkg
+
+##### Export list of installed packages
+
+    dpkg --get-selections > packages.list
+
+##### Install dselect
+
+    sudo apt install dselect
+
+##### Update dselect
+
+    sudo dselect update
+
+##### Add packages from list just created
+
+    sudo dpkg --set-selections < packages.list
+
+##### Install packages
+
+    sudo apt-get dselect-upgrade
+
+##### Update repositories
+
+    sudo apt update
+
+##### Upgrade to latest package versions
+
+    sudo apt upgrade
+
+##### Install Package
+
+    sudo apt intall -y packagename
+
+- sy -automatically say yes to requests to install packages
+
+##### Remove package
+
+    sudo apt remove --purge packagename
+
+- purge - remove package configuration
+
+##### Search for apt package
+
+    sudo apt search packagename
+
+##### Show package details
+
+    sudo apt-cache show packagename
+
+#####
+
+##### Install Snap packages
+
+    sudo snap install packagename
+
+##### Find snap package
+
+    sudo snap find packagename
+
+##### Check which path package is using
+
+    which packagename
+
+##### Update snap package
+
+    sudo snap refresh packagename
+
+##### Remove snap package
+
+    sudo snap remove
 
 ## Processes
 
 ## Networking
 
+#### Folders of interest
+
+    /ect/hostname
+    /etc/hosts
+    /etc/netplan/01-netcfg.yaml
+    /etc/nsswitch.conf
+
+- within the hostname folder is where the hostname of the current machine is
+- the hosts folder contains a list of the hostnames with IP addresses to resolve those names to
+- within the netplan directory are config files for network devices and their addresses. the files containing the configurations can be called _01-netcfg.yaml_ or _50-cloud-init.yaml_
+- nsswith.conf file determines order in which the machine checks DNS
+
+##### Change hostname
+
+    sudo hostnamectl set-hostname my.new.hosname
+
+##### Show current IP address
+
+    ip addr show
+
+##### Bring up or down network device
+
+    sudo ip link set enp0s3 up / down
+
+##### Restart all network services
+
+    sudo systemctl restart network.service
+
+##### Check current DNS resolvers
+
+    systemd-resolve --status | grep DNS\ Servers
+
 ### Network processes
 
 ##### Check what proccess ID running on what port
 
-        sudo netstat -ltnp
+        sudo netstat -tulpn
 
 - l - display only listening sockets
 - t - display tcp connection
 - n - display addresses in a numerical form
 - p - display process ID/ Program name
+- u - does something
 
 ## SSH
 
+### Simplify Connections
+
+Create file ~/.ssh/config inside the file add the following
+
+    host myserver
+        Hostname 192.0.0.1
+        Port 22
+        User username
+        IdentityFile ~/.ssh/targaryen.key
+        ServerAliveInterval seconds to ping remote server
+
+##### SSH into remote macine
+
+    ssh -p 30 user@10.0.0.1
+
+- p - specify which port to use, by default ssh traffic is over port 22
+
+##### Generate SSH Key
+
+    ssh-keygen -p
+
+- p - create passphrase with key
+
+##### Start SSH agent
+
+    eval 'ssh-agent -s'
+
+##### Add key to SSH agent
+
+    ssh-add /path/to/key
+
+##### Copy public key to remote machine
+
+    ssh-copy-id -i ~/.ssh/id_rsa.pub fortress
+
+- this copies the key to server named fortress
+
 ##### Secure Copy to remote machine
 
-        scp /path/to/file user@target:/path/to/target
-
-##### Start ssh agent
-
-        eval 'ssh-agent -s'
+    scp /path/to/file user@target:/path/to/target
 
 ##### Run a script on remote ssh
 
-        ssh root@MachineB 'bash -s' < local_script.sh
+    ssh root@MachineB 'bash -s' < local_script.sh
 
 ## Shell Scripting
 
@@ -74,7 +228,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ##### Check live log files
 
-        sudo tail n10 -f /path/to/file
+    sudo tail n10 -f /path/to/file
 
 - n - number of lines
 - f - keep file open
@@ -85,21 +239,21 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ##### List images
 
-        docker images ls
+    docker images ls
 
 ##### List containers
 
-        docker container ls -a
+    docker container ls -a
 
 - a - list all containers, without the flag it only shows active containers
 
 ##### Remove image
 
-        docker rmi image_name
+    docker rmi image_name
 
 ##### Remove all containers
 
-        docker container prune
+    docker container prune
 
 #### Start a container
 
@@ -170,13 +324,13 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 
 ##### Examples
 
-| Symbol      | Octal | Permision                                                  |
-| ----------- | ----- | ---------------------------------------------------------- |
-| -rwx------  | 700   | Only owner can read write and Execute                      |
-| -rwxr-xr-xr | 755   | Everyone on system can execute but only user can edit file |
-| -rw-rw-r--  | 664   | User read and write, Group read and write, other only read |
-| -rw-rw----  | 660   | Only user and group can read and write file                |
-| -rw-r--r--  | 664   | User read and write, group and other only read             |
+| Symbol     | Octal | Permision                                                  |
+| ---------- | ----- | ---------------------------------------------------------- |
+| -rwx------ | 700   | Only owner can read write and Execute                      |
+| -rwxr-x-xr | 755   | Everyone on system can execute but only user can edit file |
+| -rw-rw-r-- | 664   | User read and write, Group read and write, other only read |
+| -rw-rw---- | 660   | Only user and group can read and write file                |
+| -rw-r--r-- | 644   | User read and write, group and other only read             |
 
 ##### Read, write, execute
 
@@ -360,3 +514,39 @@ Install this application to set minimum requirements for passwords. This increas
     sudo mount -a
 
 - a - automatically mount all available disks
+
+## Usefull Packages
+
+### Aptitude
+
+This software is used to manage packes, offers a terminal GUI to navigate packages
+
+##### Install Aptitude
+
+    sudo apt install aptitude
+
+##### Unmark package as automatically installed
+
+    sudo aptitude unmarkauto packagename
+
+##### Run aptitude
+
+    sudo aptitude
+
+### AWS CLI
+
+##### Test cloud formation template
+
+    aws cloudformation validate-template --template-body file://sampletemplate.json
+
+### TMUX
+
+This program is used to keep a shell terminal running on a remote machine once the connection is lost. It is usefull when setting up network connections and having to restart the connection kicks you out of the system. The commandd will still keep running on the remote machine
+
+##### Install TMUX
+
+    sudo apt install tmux
+
+##### Activate tmux
+
+    tmux
