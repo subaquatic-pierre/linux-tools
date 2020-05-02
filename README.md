@@ -51,6 +51,7 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 - [Htop](#htop)
 - [Nginx](#nginx)
 - [Supervisor](#supervisor)
+- [Gunicorn](#gunicorn)
 
 ---
 
