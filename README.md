@@ -12,6 +12,10 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 [Processes](#processes)
 
+- [Process Management](#process-management)
+- [Memory Management](#memory-management)
+- [Cron Scheduling](#cron-scheduling)
+
 [Networking](#networking)
 
 - [Network Processes](#network-processes)
@@ -44,6 +48,9 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 - [Aptitude](#aptitude)
 - [AWS CLI](#storage-devices)
 - [Tmux](#tmux)
+- [Htop](#htop)
+- [Nginx](#nginx)
+- [Supervisor](#supervisor)
 
 ---
 
@@ -105,8 +112,6 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
     sudo apt-cache show packagename
 
-#####
-
 ##### Install Snap packages
 
     sudo snap install packagename
@@ -128,6 +133,104 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
     sudo snap remove
 
 ## Processes
+
+### Process management
+
+##### Show PID of process name
+
+    pidof vim
+
+- shows PID of the vim program
+
+##### Show all running processes
+
+    ps aux
+
+- add | grep programname to reduce results
+
+##### Show process with particular string
+
+    ps u -C string
+
+##### Minimize current terminal program
+
+    CTRL + Z
+
+##### Bring program back
+
+    fg
+
+##### HTOP
+
+_Check htop program in usefull program list_
+
+##### Kill process
+
+    sudo pkill -9 programname
+
+- 9 - send imidiate terminate command
+- without 9 the standard sigterm is sent to the program
+
+##### Kill proceess by PID
+
+    sudo kill 90000
+
+##### Show all running system programs
+
+    systemctl
+
+##### Get status of daemon
+
+    systemctl status -l ssh
+
+- this shows the status of the ssh daemon
+- l - shows full list of status
+
+##### Starting and stopping proecesses
+
+    sudo systemctl start / stop / restart / reload ssh
+
+- this starts, stops, resart or reload the ssh daemon. restart or reload are only available with some units
+
+##### Enable or Disable unit
+
+    sudo systemctl enable / disable ssh
+
+- disable or enable ssh daemon
+
+### Memory management
+
+##### Check free memory
+
+    free -m
+
+### Cron Scheduling
+
+Crontab is a task scheduling tool. Layout of the task in the cron file is as follows
+
+m h dom mon dow path/to/command
+
+| Symbol | Meaning           |
+| ------ | ----------------- |
+| m      | minute            |
+| h      | hour (0-23)       |
+| dom    | day of month      |
+| mon    | month             |
+| dow    | day of week (0-6) |
+
+eg.
+
+    4 0 * * 4 /home/user/cleanup.sh
+
+This task will run Friday at 12:03am
+
+##### View user crontab
+
+    crontab -l
+
+##### Create cron job
+
+    crontab -e
 
 ## Networking
 
@@ -236,6 +339,9 @@ Create file ~/.ssh/config inside the file add the following
 ## Containers
 
 ### Docker
+
+_sample file_
+[Dockerfile](docker/Dockerfile)
 
 ##### List images
 
@@ -550,3 +656,62 @@ This program is used to keep a shell terminal running on a remote machine once t
 ##### Activate tmux
 
     tmux
+
+### Htop
+
+This program is best used to display current running processes. It offers a terminal GUI to navigate processes.
+
+##### Install Htop
+
+    sudo apt install htop
+
+### Nginx
+
+Nginx is software to serve websites from a machine. It can also act as a reverse proxy for other services.
+
+#### Folders of interest
+
+    /etc/nginx/nginx.conf
+    /etc/nginx/conf.d/
+    /etc/nginx/sites-enabled/
+
+- nginx.conf file is where main system settings for nginx are configured, this file includes paths to directories which contain configurations for other servers
+- conf.d/ this directory is where a user should put all other servers which will be hosted on the machine. The extension should be conf
+- sites-enable - this is the old directory where configuration settings are installed. A user should remove the defualt server file
+
+_sample configuraion file_
+[sample1-server.conf](nginx/sample1-server.conf)
+[sample2-server.conf](nginx/sample2-server.conf)
+
+##### Install nginx
+
+    sudo apt install nginx
+
+### Supervisor
+
+This software is able to run programs on remote machnies, restart them if they go down or send alerts if there is an issue with an application
+
+#### Folders of interest
+
+    /etc/supervisor/conf.d/
+
+- any files stored on this directory with the extension .conf will be run when the supervisor command is run
+
+_sample configuration file_
+[gunicorn-supervisor.conf](supervisor/gunicorn-supervisor.conf)
+[sample-supervisor.conf](supervisor/sample-supervisor.conf)
+
+##### Install supervisor
+
+    sudo apt install supervisor
+
+### Gunicorn
+
+This software is to run a WSGI interface for python websites, in particular it is used for Django websites
+
+##### Install Gunicorn
+
+    sudo apt instasll gunicorn
+
+_sample configuration file_
+[sample-gunicorn.py](gunicorn/sample-gunicorn.py)
