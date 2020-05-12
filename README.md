@@ -2,13 +2,13 @@
 
 A list of commands for tasks and troubleshooting, commands will work with Debian and Ubuntu distributions.
 
-Be sure to read the flags underneath each command. It may not always be nesscesray to use all of the flags. Only use the options which apply to the use case.
+Be sure to read the flags underneath each command. It may not always be necessary to use all of the flags. Only use the options which apply to the use case.
 
 ---
 
 ## Contents
 
-[Software](#sofware)
+[Software](#software)
 
 [Processes](#processes)
 
@@ -26,10 +26,6 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 [Logging](#logging)
 
-[Containers](#containers)
-
-- [Docker](#docker)
-
 [Managing Files](#managing-files)
 
 [Permissions](#Permissions)
@@ -41,10 +37,12 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 [Storage Devices](#storage-devices)
 
 - [Disk Usage](#disk-usage)
-- [Managin Devices](#managing-devices)
+- [Managing Devices](#managing-devices)
 
-[Usefull Packages](#usefull-packages)
+[Useful Packages](#usefull-packages)
 
+- [Docker](#docker)
+- [Ansible](#ansible)
 - [Aptitude](#aptitude)
 - [AWS CLI](#storage-devices)
 - [Tmux](#tmux)
@@ -55,15 +53,21 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ---
 
-## Packages
+## Software
 
 #### Folders of interest
 
     /etc/apt/sources.list
 
-- this is where apt searches for repos for packages. To add a new package to the repo list create a new file called _packagename.list.d_. this will have apt search any file with .list extension
+- This is where apt searches for repos for packages. To add a new package to the repo list create a new file called _packagename.list.d_. This will have apt search any file with .list extension
 
-#### Install packes backed up with dpkg
+##### Update and install software
+
+    sudo apt update && sudo apt install
+
+- Use && to run 2 commands, if the first one fails the second one will not run
+
+#### Install packages backed up with dpkg
 
 ##### Export list of installed packages
 
@@ -72,6 +76,8 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 ##### Install dselect
 
     sudo apt install dselect
+
+- This software is used to install all packages which have been exported with dpkg
 
 ##### Update dselect
 
@@ -95,17 +101,17 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
 ##### Install Package
 
-    sudo apt intall -y packagename
+    sudo apt install -y packagename
 
-- sy -automatically say yes to requests to install packages
+- y - Automatically say yes to requests to install packages
 
 ##### Remove package
 
     sudo apt remove --purge packagename
 
-- purge - remove package configuration
+- purge - Remove package and configuration
 
-##### Search for apt package
+##### Search for an apt package
 
     sudo apt search packagename
 
@@ -116,6 +122,8 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 ##### Install Snap packages
 
     sudo snap install packagename
+
+- Snap is a newer package type, it is independent of system libraries which allows upgrades of software packages to be independent of OS upgrades
 
 ##### Find snap package
 
@@ -141,13 +149,13 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
     pidof vim
 
-- shows PID of the vim program
+- Shows process ID of the vim program
 
 ##### Show all running processes
 
-    ps aux
+    ps -aux
 
-- add | grep programname to reduce results
+- add | grep programme to reduce results to the package you are looking for
 
 ##### Show process with particular string
 
@@ -161,18 +169,22 @@ Be sure to read the flags underneath each command. It may not always be nesscesr
 
     fg
 
+- Add a number after fg if there are multiple terminals which have been minimized
+
 ##### HTOP
 
-_Check htop program in usefull program list_
+_Check htop program in useful program list_
+
+This software gives a full list of available and installed packages. It offers a GUI in the terminal to manage packages
 
 ##### Kill process
 
     sudo pkill -9 programname
 
-- 9 - send imidiate terminate command
-- without 9 the standard sigterm is sent to the program
+- 9 - Send immediate terminate command
+- Without 9 the standard SIGTERM is sent to the program
 
-##### Kill proceess by PID
+##### Kill process by PID
 
     sudo kill 90000
 
@@ -180,18 +192,20 @@ _Check htop program in usefull program list_
 
     systemctl
 
+- Use sudo if you want access to info only root user can see
+
 ##### Get status of daemon
 
     systemctl status -l ssh
 
-- this shows the status of the ssh daemon
-- l - shows full list of status
+- This shows the status of the ssh daemon
+- l - Shows full list of status
 
-##### Starting and stopping proecesses
+##### Starting and stopping processes
 
     sudo systemctl start / stop / restart / reload ssh
 
-- this starts, stops, resart or reload the ssh daemon. restart or reload are only available with some units
+- This starts, stops, restart or reload the ssh daemon. Restart or reload are only available with some units
 
 ##### Enable or Disable unit
 
@@ -223,7 +237,8 @@ eg.
 
     4 0 * * 4 /home/user/cleanup.sh
 
-This task will run Friday at 12:03am
+- This task will run Friday at 12:03am
+- Always use for path to file
 
 ##### View user crontab
 
@@ -242,14 +257,14 @@ This task will run Friday at 12:03am
     /etc/netplan/01-netcfg.yaml
     /etc/nsswitch.conf
 
-- within the hostname folder is where the hostname of the current machine is
-- the hosts folder contains a list of the hostnames with IP addresses to resolve those names to
-- within the netplan directory are config files for network devices and their addresses. the files containing the configurations can be called _01-netcfg.yaml_ or _50-cloud-init.yaml_
+- Within the hostname folder is where the hostname of the current machine is
+- The hosts folder contains a list of the hostnames with IP addresses to resolve those names to
+- Within the netplan directory are config files for network devices and their addresses. The files containing the configurations can be called _01-netcfg.yaml_ or _50-cloud-init.yaml_
 - nsswith.conf file determines order in which the machine checks DNS
 
 ##### Change hostname
 
-    sudo hostnamectl set-hostname my.new.hosname
+    sudo hostnamectl set-hostname my.new.hostname
 
 ##### Show current IP address
 
@@ -269,15 +284,16 @@ This task will run Friday at 12:03am
 
 ### Network processes
 
-##### Check what proccess ID running on what port
+##### Check what process ID is running on what port
 
         sudo netstat -tulpn
 
-- l - display only listening sockets
-- t - display tcp connection
-- n - display addresses in a numerical form
-- p - display process ID/ Program name
-- u - does something
+- l - Display only listening sockets
+- t - Display TCP connection
+- n - Display addresses in a numerical form
+- p - Display process ID/ Program name
+- u - Display UDP connections
+- c - Continuous
 
 ## SSH
 
@@ -292,11 +308,13 @@ Create file ~/.ssh/config inside the file add the following
         IdentityFile ~/.ssh/targaryen.key
         ServerAliveInterval seconds to ping remote server
 
-##### SSH into remote macine
+- Adding a configuration file allows automatic use of settings when connecting to specific host
+
+##### SSH into remote machine
 
     ssh -p 30 user@10.0.0.1
 
-- p - specify which port to use, by default ssh traffic is over port 22
+- p - Specify which port to use, by default ssh traffic is over port 22
 
 ##### Generate SSH Key
 
@@ -316,7 +334,7 @@ Create file ~/.ssh/config inside the file add the following
 
     ssh-copy-id -i ~/.ssh/id_rsa.pub fortress
 
-- this copies the key to server named fortress
+- This copies the key to server named fortress
 
 ##### Secure Copy to remote machine
 
@@ -328,55 +346,67 @@ Create file ~/.ssh/config inside the file add the following
 
 ## Shell Scripting
 
+Shell scripting is the act of writing commands into a text file which can be run. These commands are then executed by the terminal line by line. When creating a script it is important to change the mode of the file to be executable
+
+    chmod +x /path/to/file
+
+_sample script_
+[sample-script.sh](bash/sample-script.sh)
+
+#### Files of interest
+
+    /home/user/.bashrc
+
+- This is where configuration settings for the bash terminal are. If any variables or aliases are added to this file they will be initialized when a user opens a terminal
+
+##### Change back to previous working directory
+
+    cd -
+
+##### Check current bash variables
+
+    env
+
+##### Check bash history
+
+    history
+
+- Run the command by typing _!numberofcommand_
+
+##### Delete something from history
+
+    history -d numberofcommand
+
+##### Run previous command with sudo privileges
+
+    sudo !!
+
+##### Echo out a varaible
+
+    echo $variablename
+
+##### Check status code of previous command
+
+    echo !?
+
+##### Add alias to a command
+
+    alias install='sudo apt install'
+
+- This allows you to set up custom commands
+
+##### Add variable to environment
+
+    export VARIABLE=something
+
 ## Logging
 
 ##### Check live log files
 
     sudo tail n10 -f /path/to/file
 
-- n - number of lines
-- f - keep file open
-
-## Containers
-
-### Docker
-
-_sample file_
-[Dockerfile](docker/Dockerfile)
-
-##### List images
-
-    docker images ls
-
-##### List containers
-
-    docker container ls -a
-
-- a - list all containers, without the flag it only shows active containers
-
-##### Remove image
-
-    docker rmi image_name
-
-##### Remove all containers
-
-    docker container prune
-
-#### Start a container
-
-##### Build contianer from local Dockerfile
-
-        docker build -t image_name .
-
-- t - name you wish to give the container
-
-##### Run container after building it
-
-        docker run -d --name container_name -p 80:80 image_name
-
-- d -
-- name - give container name or a default one will be created
-- p - assign port mapping first is host second is container port
+- n - Number of lines
+- f - Keep file open, view logs files live
 
 ## Managing Files
 
@@ -384,7 +414,7 @@ _sample file_
 
     ls -s originalfile linkedfile
 
-- this command create a soft symbolic link to the first file, the second file can be moved around anywhere and minipulated. When it is open it points to the original file. it is similar to a shortcut on Windows OS
+- This command create a soft symbolic link to the first file, the second file can be moved around anywhere and manipulated. When it is open it points to the original file. It is similar to a shortcut on Windows OS
 
 ##### Make new directory
 
@@ -392,49 +422,47 @@ _sample file_
 
 ##### Viewing contents of files
 
-    cat /path/tofile            - Display the contents of file
-    more /path/tofile           - Browse through text file
-    less /path/tofile           - More features than more
-    head -n10 /path/tofile       - Output the beggining or top portion of file
-    tail -n10 /path/tofile       - Output the ending or bottom portion of the file
+    cat /path/to/file            - Display the contents of file
+    more /path/to/file           - Browse through text file
+    less /path/to/file           - More features than more
+    head -n10 /path/to/file       - Output the beginning or top portion of file
+    tail -n10 /path/to/file       - Output the ending or bottom portion of the file
 
-- number of lines to be displayed when using the head or tail command
+- Number of lines to be displayed when using the head or tail command
 
 ##### Grep for contents
 
     cat /etc/shadow | grep myuser
 
-- this will only show information regarding the user which you grepped for
+- This will only show information regarding the user which you grepped for
 
 ##### Remove directory
 
     rm -rf /path/to/dir
 
-- r - recursively remove all files
-- f - forcefully (be carefull when using this variant)
+- r - Recursively remove all files
+- f - Forcefully (be careful when using this variant)
 
 ##### Create file
 
-    touch -p /path/to/file
-
-- p - creates all parent folders if they dont exist
+    touch /path/to/file
 
 ## Permissions
 
-Permsions dictate who has access to what files, the persmions are broken into 3 groups. The user, group and other. Permisions can exist of both directories and on files. Another name for permisions is mode
+Permissions dictate who has access to what files, the permissions are broken into 3 groups. The user, group and other. Permissions can exist of both directories and on files. Another name for permissions is mode
 
-- Permisions on a directory can effect files in the directory
-- If the file permsiosns look correct, check directory Permisions
+- Permissions on a directory can effect files in the directory
+- When having an issue with a file check directory permissions
 - Work your way up to root
 
 ### Modes
 
 ##### Examples
 
-| Symbol     | Octal | Permision                                                  |
+| Symbol     | Octal | Permission                                                 |
 | ---------- | ----- | ---------------------------------------------------------- |
 | -rwx------ | 700   | Only owner can read write and Execute                      |
-| -rwxr-x-xr | 755   | Everyone on system can execute but only user can edit file |
+| -rwxr-xr-x | 755   | Everyone on system can execute but only user can edit file |
 | -rw-rw-r-- | 664   | User read and write, Group read and write, other only read |
 | -rw-rw---- | 660   | Only user and group can read and write file                |
 | -rw-r--r-- | 644   | User read and write, group and other only read             |
@@ -453,17 +481,17 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 | Binary   | 111 | 101 | 100 |
 | Decimal  | 7   | 5   | 4   |
 
-##### Chnage directory mode recursively
+##### Change directory mode recursively
 
     chmod 770 -R mydir
 
-- R - change all sub files and folders
+- R - Change all sub files and folders
 
 ##### Change owner of file
 
     sudo chown -R username file.txt
 
-- R - recuresivley change the permisions
+- R - Recursively change the permissions
 
 ##### Change owner and group
 
@@ -476,20 +504,20 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
     /etc/password
     /etc/shadow
 
-- the password folder contains all user info
-- the shadow folder contains password information of users
+- The password folder contains all user info
+- The shadow folder contains password information of users
 
-##### Swithing user
+##### Switching user
 
     su username
 
-- exclude the username if you wish to swith to root user
+- Exclude the username if you wish to switch to root user
 
 ##### Add new user
 
     sudo adduser username
 
-- this command as a script for the useradd command
+- This command is a script for the useradd command
 
 ##### Delete user
 
@@ -506,23 +534,23 @@ Permsions dictate who has access to what files, the persmions are broken into 3 
 
     sudo usermod -l oldname newname
 
-##### Lock user accout
+##### Lock user account
 
     sudo passwd -l username
 
-- l - lock account
-- u - unlock account
+- l - Lock account
+- u - Unlock account
 
 ##### Check expiration date of user password
 
     sudo chage -l username
 
-- l - list details
-- d 0 - set number of days to expire to 0 this will disable account
-- M 90 - set number of days after which a user needs to replace their password
-- m - set minimum number of days for password to be active, good if someone keeps changing their password back
+- l - List details
+- d 0 - Set number of days to expire to 0 this will disable account
+- M 90 - Set number of days after which a user needs to replace their password
+- m - Set minimum number of days for password to be active, good if someone keeps changing their password back
 
-#### Plugable Authentication Module
+_Plugable Authentication Module_
 
 Install this application to set minimum requirements for passwords. This increases password strength within the machine
 
@@ -532,15 +560,15 @@ Install this application to set minimum requirements for passwords. This increas
 
     /etc/group
 
-- this file shows all groups on the machine
+- This file shows all groups on the machine
 
 ##### Sudoers folder
 
     /etc/sudoers
     sudo EDITOR=vim visudo
 
-- this file contains all the users who have sudo privelages, edit this folder with the following command
-- this allows for the detection of any mistakes made in the sudoers file
+- This file contains all the users who have sudo privileges, edit this folder with the following command
+- This allows for the detection of any mistakes made in the sudoers file
 
 ##### Create new group
 
@@ -554,9 +582,9 @@ Install this application to set minimum requirements for passwords. This increas
 
     sudo usermod -aG group user
 
-- a - append a secondary group, if you dont add this flag it will replace all current groups
+- a - Append a secondary group, if you don't add this flag it will replace all current groups
 - G - This states a secondary group to add the user to
-- aG sudo - this adds a user to the sudoers group. this allows the user to use the sudo command
+- aG sudo - This adds a user to the sudoers group. this allows the user to use the sudo command
 
 ##### Change user primary group
 
@@ -574,35 +602,35 @@ Install this application to set minimum requirements for passwords. This increas
 
     sudo apt install ncdu
 
-- this program allows a person to naviage though the directory tree while viewing disk usage
+- This program allows a person to navigate though the directory tree while viewing disk usage
 
 ##### Show disk usage
 
     df -h
 
-- h - shows usage in human readable form
+- h - Shows usage in human readable form
 
 ##### Show inodes
 
     df -i
 
-- i - shows free inodes
+- i - Shows free inodes
 
 ##### Check disk usage
 
     du -hsc *
 
-- h - shows human readbale disk usage
-- s - summary
-- c - current working directory
+- h - Shows human readable disk usage
+- s - Summary
+- c - Current working directory
 
 ### Manageing Devices
 
-#### Important folders
+#### Folders of interest
 
     /etc/fstab
 
-- this folder lists all active file storage devices on the machine. it also whows where devices should be mounted on startup
+- This folder lists all active file storage devices on the machine. It also shows where devices should be mounted on startup
 
 ##### Show all disks
 
@@ -620,13 +648,66 @@ Install this application to set minimum requirements for passwords. This increas
 
     sudo mount -a
 
-- a - automatically mount all available disks
+- a - Automatically mount all available disks
 
-## Usefull Packages
+## Useful Packages
 
-### Aptitude
+## Docker
 
-This software is used to manage packes, offers a terminal GUI to navigate packages
+##### Install docker
+
+    sudo apt install docker
+
+_sample file_
+[Dockerfile](docker/Dockerfile)
+
+##### Search docker containers on dockerhub
+
+    docker search
+
+##### Pull image from dockerhub
+
+    docker pull ubuntu
+
+- Pull the ubuntu image from dockerhub
+
+##### List images
+
+    docker images ls
+
+##### List containers
+
+    docker container ls -a
+
+- a - List all containers, without the flag it only shows active containers
+
+##### Remove image
+
+    docker rmi image_name or ID number
+
+##### Remove all containers
+
+    docker container prune
+
+#### Start a container
+
+##### Build container from local Dockerfile
+
+        docker build -t image_name .
+
+- t - name you wish to give the container
+
+##### Run container after building it
+
+        docker run -d --name container_name -p 80:80 image_name
+
+- d -
+- name - give container name or a default one will be created
+- p - assign port mapping first is host second is container port
+
+## Aptitude
+
+This software is used to manage packages, offers a terminal GUI to navigate packages
 
 ##### Install Aptitude
 
@@ -640,15 +721,15 @@ This software is used to manage packes, offers a terminal GUI to navigate packag
 
     sudo aptitude
 
-### AWS CLI
+## AWS CLI
 
 ##### Test cloud formation template
 
-    aws cloudformation validate-template --template-body file://sampletemplate.json
+    aws conformation validate-template --template-body file://sampletemplate.json
 
-### TMUX
+## TMUX
 
-This program is used to keep a shell terminal running on a remote machine once the connection is lost. It is usefull when setting up network connections and having to restart the connection kicks you out of the system. The commandd will still keep running on the remote machine
+This program is used to keep a shell terminal running on a remote machine once the connection is lost. It is useful when setting up network connections and having to restart the connection kicks you out of the system. The command will still keep running on the remote machine
 
 ##### Install TMUX
 
@@ -658,7 +739,7 @@ This program is used to keep a shell terminal running on a remote machine once t
 
     tmux
 
-### Htop
+## Htop
 
 This program is best used to display current running processes. It offers a terminal GUI to navigate processes.
 
@@ -666,7 +747,7 @@ This program is best used to display current running processes. It offers a term
 
     sudo apt install htop
 
-### Nginx
+## Nginx
 
 Nginx is software to serve websites from a machine. It can also act as a reverse proxy for other services.
 
@@ -688,15 +769,15 @@ _sample configuraion file_
 
     sudo apt install nginx
 
-### Supervisor
+## Supervisor
 
-This software is able to run programs on remote machnies, restart them if they go down or send alerts if there is an issue with an application
+This software is able to run programs on remote machines, restart them if they go down or send alerts if there is an issue with an application
 
 #### Folders of interest
 
     /etc/supervisor/conf.d/
 
-- any files stored on this directory with the extension .conf will be run when the supervisor command is run
+- Any files stored on this directory with the extension .conf will be run when the supervisor command is run
 
 _sample configuration file_
 [gunicorn-supervisor.conf](supervisor/gunicorn-supervisor.conf)
@@ -706,13 +787,13 @@ _sample configuration file_
 
     sudo apt install supervisor
 
-### Gunicorn
+## Gunicorn
 
 This software is to run a WSGI interface for python websites, in particular it is used for Django websites
 
 ##### Install Gunicorn
 
-    sudo apt instasll gunicorn
+    sudo apt install gunicorn
 
 _sample configuration file_
 [sample-gunicorn.py](gunicorn/sample-gunicorn.py)
