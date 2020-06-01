@@ -50,6 +50,7 @@ Be sure to read the flags underneath each command. It may not always be necessar
 - [Nginx](#nginx)
 - [Supervisor](#supervisor)
 - [Gunicorn](#gunicorn)
+- [React](#react)
 
 ---
 
@@ -410,6 +411,15 @@ _sample script_
 
 ## Managing Files
 
+#### Find File
+
+    find -name path/to/search filename
+
+- -name - Name of file
+- -type f - Type is file
+- -type d - Type of directory
+- 03 - Efficient use of resources and likelihood
+
 ##### Create symlink
 
     ls -s originalfile linkedfile
@@ -759,9 +769,9 @@ Nginx is software to serve websites from a machine. It can also act as a reverse
 
 - nginx.conf file is where main system settings for nginx are configured, this file includes paths to directories which contain configurations for other servers
 - conf.d/ this directory is where a user should put all other servers which will be hosted on the machine. The extension should be conf
-- sites-enable - this is the old directory where configuration settings are installed. A user should remove the defualt server file
+- sites-enable - this is the old directory where configuration settings are installed. A user should remove the default server file
 
-_sample configuraion file_
+_sample configuration file_
 [sample1-server.conf](nginx/sample1-server.conf)
 [sample2-server.conf](nginx/sample2-server.conf)
 
@@ -797,3 +807,9 @@ This software is to run a WSGI interface for python websites, in particular it i
 
 _sample configuration file_
 [sample-gunicorn.py](gunicorn/sample-gunicorn.py)
+
+## React
+
+Start new React applicatiojn
+
+    npx create-react-app
