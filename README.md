@@ -772,8 +772,7 @@ Nginx is software to serve websites from a machine. It can also act as a reverse
 - sites-enable - this is the old directory where configuration settings are installed. A user should remove the default server file
 
 _sample configuration file_
-[sample1-server.conf](nginx/sample1-server.conf)
-[sample2-server.conf](nginx/sample2-server.conf)
+[mywebserver.conf](nginx/mywebserver.conf)
 
 ##### Install nginx
 
@@ -783,6 +782,10 @@ _sample configuration file_
 
 This software is able to run programs on remote machines, restart them if they go down or send alerts if there is an issue with an application
 
+#### Docs
+
+    http://supervisord.org/configuration.html#supervisorctl-section-settings
+
 #### Folders of interest
 
     /etc/supervisor/conf.d/
@@ -790,8 +793,7 @@ This software is able to run programs on remote machines, restart them if they g
 - Any files stored on this directory with the extension .conf will be run when the supervisor command is run
 
 _sample configuration file_
-[gunicorn-supervisor.conf](supervisor/gunicorn-supervisor.conf)
-[sample-supervisor.conf](supervisor/sample-supervisor.conf)
+[gunicorn-supervisor.conf](supervisor/supervisor.conf)
 
 ##### Install supervisor
 
@@ -801,12 +803,16 @@ _sample configuration file_
 
 This software is to run a WSGI interface for python websites, in particular it is used for Django websites
 
+#### Docs
+
+    https://docs.gunicorn.org/en/stable/settings.html
+
 ##### Install Gunicorn
 
     sudo apt install gunicorn
 
 _sample configuration file_
-[sample-gunicorn.py](gunicorn/sample-gunicorn.py)
+[gunicorn.config.py](gunicorn/gunicorn.config.py)
 
 ## React
 

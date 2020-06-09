@@ -6,3 +6,5 @@ workers = 4
 worker_class = 'gevent'
 
 accesslog = '-'
+errorlog = '-'
+loglevel = 'debug'
