@@ -325,7 +325,7 @@ Create file ~/.ssh/config inside the file add the following
 
 ##### Start SSH agent
 
-    eval 'ssh-agent -s'
+    eval "$(ssh-agent)"
 
 ##### Add key to SSH agent
 
