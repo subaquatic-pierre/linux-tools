@@ -270,6 +270,12 @@ eg.
 ##### Show current IP address
 
     ip addr show
+    ifconfig -a
+
+##### Get public IP address
+
+    curl ifconfig.me
+    curl ident.me
 
 ##### Bring up or down network device
 
