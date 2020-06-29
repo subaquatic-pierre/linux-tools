@@ -277,6 +277,14 @@ eg.
     curl ifconfig.me
     curl ident.me
 
+##### Check DHCP journal entries
+
+    journalctl | grep -Ei 'dhcp' | tail -n30
+
+##### Use netplan to get further DHCP info
+
+    netplan ip leases ens5
+
 ##### Bring up or down network device
 
     sudo ip link set enp0s3 up / down
@@ -822,6 +830,20 @@ _sample configuration file_
 
 ## React
 
-Start new React applicatiojn
+##### Start new React application
 
-    npx create-react-app
+    npx create-react-app name-of-project
+
+##### Eject react settings
+
+    npm run eject
+
+##### Install Enzyme and EnzymeAdapter for React 16
+
+    npm i --save-dev enzyme enzyme-adapter-react-16
+
+- Testing framework used with Jest
+
+##### Run tests
+
+    npm run test
