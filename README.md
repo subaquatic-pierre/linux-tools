@@ -648,7 +648,7 @@ Install this application to set minimum requirements for passwords. This increas
 - s - Summary
 - c - Current working directory
 
-### Manageing Devices
+### Managing Devices
 
 #### Folders of interest
 
@@ -787,6 +787,11 @@ Nginx is software to serve websites from a machine. It can also act as a reverse
 
 _sample configuration file_
 [mywebserver.conf](nginx/mywebserver.conf)
+
+#### ApolloServer - ApolloClient configuration settings
+
+_sample Nginx and JS file_
+[configuration](apollo)
 
 ##### Install nginx
 
