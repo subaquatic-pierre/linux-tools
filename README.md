@@ -791,7 +791,7 @@ _sample configuration file_
 #### ApolloServer - ApolloClient configuration settings
 
 _sample Nginx and JS file_
-[configuration](./apollo/)
+[configuration](./apollo/apollo-server-client-config.md)
 
 ##### Install nginx
 
