@@ -301,7 +301,7 @@ eg.
 
 ##### Check what process ID is running on what port
 
-        sudo netstat -tulpn
+    sudo netstat -tulpn
 
 - l - Display only listening sockets
 - t - Display TCP connection
@@ -309,6 +309,13 @@ eg.
 - p - Display process ID/ Program name
 - u - Display UDP connections
 - c - Continuous
+
+##### Check ports in use
+
+    sudo lsof -i -P -n | grep LISTEN
+    sudo netstat -tulpn | grep LISTEN
+    sudo lsof -i:22 ## see a specific port such as 22 ##
+    sudo nmap -sTU -O IP-address-Here
 
 ## SSH
 
