@@ -142,6 +142,21 @@ Be sure to read the flags underneath each command. It may not always be necessar
 
     sudo snap remove
 
+##### Locate package files
+
+    locate packagename
+
+##### Unpack .tgz file
+
+    tar -xzvf data.tgz -C /tmp 
+
+- x - Extract file
+- z - Deal with compressed file i.e. filter the archive through gzip
+- v - Verbose output i.e. show progress
+- f - File, work on data.tgz file.
+- C - /path/to/file
+- t - List all files stored in the archive
+
 ## Processes
 
 ### Process management
