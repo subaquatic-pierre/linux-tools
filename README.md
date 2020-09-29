@@ -161,6 +161,10 @@ Be sure to read the flags underneath each command. It may not always be necessar
 
 ### Process management
 
+##### Update system clock
+
+    sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"
+
 ##### Show PID of process name
 
     pidof vim
