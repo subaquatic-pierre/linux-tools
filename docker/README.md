@@ -11,7 +11,7 @@
     sudo apt install docker
 
 _sample file_
-[Dockerfile](docker/Dockerfile)
+[Dockerfile](Dockerfile)
 
 ##### Search docker containers on dockerhub
 
