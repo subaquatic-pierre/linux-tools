@@ -803,23 +803,3 @@ This software is to run a WSGI interface for python websites, in particular it i
 
 _sample configuration file_
 [gunicorn.config.py](gunicorn/gunicorn.config.py)
-
-## React
-
-##### Start new React application
-
-    npx create-react-app name-of-project
-
-##### Eject react settings
-
-    npm run eject
-
-##### Install Enzyme and EnzymeAdapter for React 16
-
-    npm i --save-dev enzyme enzyme-adapter-react-16
-
-- Testing framework used with Jest
-
-##### Run tests
-
-    npm run test
