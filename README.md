@@ -39,18 +39,18 @@ Be sure to read the flags underneath each command. It may not always be necessar
 - [Disk Usage](#disk-usage)
 - [Managing Devices](#managing-devices)
 
-[Useful Packages](#usefull-packages)
+[Useful Packages](#useful-packages)
 
 - [Docker](docker)
+- [React](react)
 - [Ansible](#ansible)
 - [Aptitude](#aptitude)
-- [AWS CLI](#storage-devices)
+- [AWS CLI](#aws-cli)
 - [Tmux](#tmux)
 - [Htop](#htop)
 - [Nginx](#nginx)
 - [Supervisor](#supervisor)
 - [Gunicorn](#gunicorn)
-- [React](#react)
 
 ---
 
