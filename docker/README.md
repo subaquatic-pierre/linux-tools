@@ -12,6 +12,8 @@
 
 _sample file_
 [Dockerfile](Dockerfile)
+_sample file_
+[Docker Compose](docker-compose.yaml)
 
 ##### Search docker containers on dockerhub
 
