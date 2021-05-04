@@ -56,13 +56,13 @@ _sample file_
 
 ##### Build container from local Dockerfile
 
-        docker build -t image_name .
+    docker build -t image_name .
 
 - t - name you wish to give the container
 
 ##### Run container after building it
 
-        docker run -d --name container_name -p 80:80 image_name
+    docker run -d --name container_name -p 80:80 image_name
 
 - d -
 - name - give container name or a default one will be created
