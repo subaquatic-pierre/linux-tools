@@ -4,6 +4,10 @@
 
 [Installation](https://www.postgresqltutorial.com/install-postgresql-linux/)
 
+[Management Commands](https://www.postgresqltutorial.com/postgresql-administration/)
+
+[Common commands](https://www.postgresqltutorial.com/psql-commands/)
+
 ## CLI
 
 ##### Switch role to postgres
