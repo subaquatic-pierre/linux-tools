@@ -43,6 +43,7 @@ Be sure to read the flags underneath each command. It may not always be necessar
 
 - [Docker](docker)
 - [React](react)
+- [Postgres](postgres)
 - [Ansible](#ansible)
 - [Aptitude](#aptitude)
 - [AWS CLI](#aws-cli)
