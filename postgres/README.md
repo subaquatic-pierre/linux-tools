@@ -1,73 +1,49 @@
-# Docker
+# Postgres
 
 ### Docs
 
-[Reference](https://docs.docker.com/engine/reference/run/)
+[Installation](https://www.postgresqltutorial.com/install-postgresql-linux/)
 
-_sample file_
-[Dockerfile](Dockerfile)
+[Management Commands](https://www.postgresqltutorial.com/postgresql-administration/)
 
-_sample file_
-[Docker Compose](docker-compose.yaml)
+[Common commands](https://www.postgresqltutorial.com/psql-commands/)
 
 ## CLI
 
-##### Search docker containers on dockerhub
+##### Switch role to postgres
 
-    docker search
+    sudo -i -u postgres
 
-##### Tag docker image for AWS
+##### Start client
 
-    docker tag hello-world:latest aws_account_id.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
+    psql
 
-##### Upload Docker image to AWS ECR
+##### List all users
 
-    docker push aws_account_id.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
+    \du
 
-##### Get login details for AWS ECR
+##### List all databases
 
-    aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+    \l
 
-##### Pull image from dockerhub
+##### List available tables in database
 
-    docker pull ubuntu
+    \dt
 
-- Pull the ubuntu image from dockerhub
+##### Describe table
 
-##### List images
+    \d table_name
 
-    docker images ls
+##### List available schema
 
-##### List containers
+    \dn
 
-    docker container ls -a
+##### Switch to new database
 
-- a - List all containers, without the flag it only shows active containers
+    \c dbname username
 
-##### Remove image
+- A new username can be specified after database name, if omitted current user is used
 
-    docker rmi image_name or ID number
+#####
 
-##### Remove all containers
-
-    docker container prune
-
-#### Start a container
-
-##### Build container from local Dockerfile
-
-    docker build -t image_name .
-
-- t - name you wish to give the container
-
-##### Run container after building it
-
-    docker run -d --name container_name -p 80:80 image_name
-
-- d -
-- name - give container name or a default one will be created
-- p - assign port mapping first is host second is container port
-
-##### Install docker
-
-    sudo apt install docker
+    \dt
