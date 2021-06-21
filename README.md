@@ -731,6 +731,10 @@ This software is used to manage packages, offers a terminal GUI to navigate pack
 
     aws s3 cp directory_to_copy/ s3://bucket_name/ --recursive --acl public-read
 
+#### Recursive delete all files in bucket
+
+    aws s3 rm s3://bucket_name/ --recursive
+
 ## TMUX
 
 This program is used to keep a shell terminal running on a remote machine once the connection is lost. It is useful when setting up network connections and having to restart the connection kicks you out of the system. The command will still keep running on the remote machine
