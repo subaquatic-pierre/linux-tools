@@ -56,6 +56,8 @@ _sample file_
 
 #### Start a container
 
+    docker container start container_id
+
 #### Build container from local Dockerfile
 
     docker build -t image_name .
@@ -69,3 +71,12 @@ _sample file_
 - d -
 - name - give container name or a default one will be created
 - p - assign port mapping first is host second is container port
+- it - interactive terminal
+- --network - specify network for container to run on
+- v - map directory from host to container
+
+#### Bash into running container
+
+    docker exec -it container_id bash
+
+####
