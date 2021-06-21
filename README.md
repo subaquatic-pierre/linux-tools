@@ -723,6 +723,14 @@ This software is used to manage packages, offers a terminal GUI to navigate pack
 
     aws conformation validate-template --template-body file://sampletemplate.json
 
+#### Invalidate cloudfront cache
+
+    aws cloudfront create-invalidation --distribution-id 000000 --paths "/*"
+
+#### Copy directory to S3
+
+    aws s3 cp directory_to_copy/ s3://bucket_name/ --recursive --acl public-read
+
 ## TMUX
 
 This program is used to keep a shell terminal running on a remote machine once the connection is lost. It is useful when setting up network connections and having to restart the connection kicks you out of the system. The command will still keep running on the remote machine
