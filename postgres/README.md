@@ -10,40 +10,40 @@
 
 ## CLI
 
-##### Switch role to postgres
+#### Switch role to postgres
 
     sudo -i -u postgres
 
-##### Start client
+#### Start client
 
     psql
 
-##### List all users
+#### List all users
 
     \du
 
-##### List all databases
+#### List all databases
 
     \l
 
-##### List available tables in database
+#### List available tables in database
 
     \dt
 
-##### Describe table
+#### Describe table
 
     \d table_name
 
-##### List available schema
+#### List available schema
 
     \dn
 
-##### Switch to new database
+#### Switch to new database
 
     \c dbname username
 
 - A new username can be specified after database name, if omitted current user is used
 
-#####
+####
 
     \dt
