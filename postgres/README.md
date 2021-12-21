@@ -10,6 +10,10 @@
 
 ## CLI
 
+#### Start server
+
+    sudo service postgresql start
+
 #### Switch role to postgres
 
     sudo -i -u postgres
