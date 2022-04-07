@@ -52,6 +52,7 @@ Be sure to read the flags underneath each command. It may not always be necessar
 - [Nginx](#nginx)
 - [Supervisor](#supervisor)
 - [Gunicorn](#gunicorn)
+- [Twine](#twine)
 
 ---
 
@@ -729,7 +730,9 @@ This software is used to manage packages, offers a terminal GUI to navigate pack
 
 #### Copy directory to S3
 
-    aws s3 cp directory_to_copy/ s3://bucket_name/ --recursive --acl public-read
+    aws s3 cp directory_to_copy/ s3://bucket_name/ --recursive
+
+- --acl public-read : Creates objects with public access
 
 #### Recursive delete all files in bucket
 
@@ -828,3 +831,21 @@ This software is to run a WSGI interface for python websites, in particular it i
 
 _sample configuration file_
 [gunicorn.config.py](gunicorn/gunicorn.config.py)
+
+## Twine
+
+Python package manager for PyPi
+
+### Twine Docs
+
+    https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/
+
+#### Build package
+
+    python -m build
+
+#### Upload to PyPi
+
+    twine upload build/*
+
+- --skip-existing : Allows a new version to be uploaded
