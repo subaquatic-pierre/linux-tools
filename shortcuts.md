@@ -26,7 +26,7 @@
 
 ### Snap Window to Screen Side
 
-- **Shortcut**: `Shift+Left/Right`
+- **Shortcut**: `Super+Left/Right`
 - **Notes**: Dock window left or right.
 
 ### Switch Apps
@@ -48,6 +48,11 @@
 
 - **Shortcut**: `Super+B`
 - **Notes**: Launch default browser.
+
+### Open Terminal
+
+- **Shortcut**: `Super+T`
+- **Notes**: Launch default terminal.
 
 ### Navigate Tabs
 
@@ -95,7 +100,7 @@
 ### Keyboard Shortcuts
 
 - **Shortcut**: `Ctrl+.`
-- **Notes**: Opens shortcuts UI.
+- **Notes**: Opens shortcuts.
 
 ### Copy Line Up/Down
 
@@ -142,11 +147,6 @@
 - **Shortcut**: `Ctrl+N`
 - **Notes**: Opens Explorer.
 
-### Reopen Closed Tab
-
-- **Shortcut**: `Ctrl+T`
-- **Notes**: Opens last closed file.
-
 ### Quick Open Files
 
 - **Shortcut**: `Ctrl+P`
@@ -171,7 +171,7 @@
 
 ## 🔹 VS Code Vim (Visual / Insert)
 
-### Enter Visual Mode
+### Enter Select Mode
 
 - **Shortcut**: `v`
 - **Notes**: Select text by motion.
