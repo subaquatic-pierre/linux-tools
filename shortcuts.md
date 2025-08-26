@@ -250,6 +250,11 @@
 
 ## 🔹 VS Code Vim (Navigation)
 
+### Cursor to First Error
+
+- **Shortcut**: `f8`
+- **Notes**: Jump to the first error
+
 ### Top of File
 
 - **Shortcut**: `Shift+G`
